@@ -8,18 +8,10 @@ int main ()
 	fclose(input);
 	//a = a / b;
 	asm volatile(
-		"mov %[A], %%eax\n\t"
-		"mov %[B], %%ebx\n\t"
-		"xor %%edx, %%edx\n\t"
-
-		"idiv %%ebx\n\t"
-		"mov %%eax, %[A]\n\t"
-
+		"div %[A],%[A],%[B]\n\t"
 		:[A] "+r"(a)
 		:[B] "r"(b)
-		:"eax","ebx","edx"
-			
-	);
+		);
 	printf("%d\n", a);
 	return 0;
 }
