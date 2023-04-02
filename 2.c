@@ -18,7 +18,15 @@ for (int i = 0; i < arr_size; i++){
 }
 */
 for (int i = 0; i < arr_size; i++)
-asm volatile(/*Your Code*/);
+asm volatile(
+	"div %[F],%[D],%[E]\n\t"
+	"addi %[A],%[A],4\n\t"
+	"addi %[B],%[B],4\n\t"
+	"addi %[C],%[C],4\n\t"
+	:[F] "=r"(*p_c),[A] "+r"(p_a),[B] "+r"(p_b),[C] "+r"(p_c)
+	:[D] "r"(*p_a),[E] "r"(*p_b)	
+	:
+	);
 p_c = &c[0];
 for (int i = 0; i < arr_size; i++)
 printf("%d ", *p_c++);
